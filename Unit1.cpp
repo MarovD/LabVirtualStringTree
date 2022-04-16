@@ -197,9 +197,6 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 		 AnsiString str="DELETE from databases where id = "+(AnsiString)nodeData->id +" ;";
 		 sqlite3 *db;
-		 sqlite3_stmt *pStmt;
-		 int rc,coln,j;
-		 UnicodeString Zapros;
 
 		 if ( sqlite3_open(db_name,&db))
 			{
@@ -210,15 +207,12 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 			if (sqlite3_exec(db, str.c_str(), NULL, 0,NULL))
 			{
-				sqlite3_finalize(pStmt);
 				sqlite3_close(db);
 			}
-
-
-		sqlite3_finalize(pStmt);
 		sqlite3_close(db);
+        VirtualStringTree2->Clear();
+		 Button1Click(Sender);
 
-         Button1Click(Sender);
 }
 //---------------------------------------------------------------------------
 
