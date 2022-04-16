@@ -12,6 +12,13 @@ object Form1: TForm1
   Font.Style = []
   Position = poDesigned
   TextHeight = 15
+  object Label1: TLabel
+    Left = 8
+    Top = 408
+    Width = 193
+    Height = 28
+    Caption = 'Label1'
+  end
   object VirtualStringTree1: TVirtualStringTree
     Left = 8
     Top = 8
@@ -83,5 +90,23 @@ object Form1: TForm1
         Text = #1055#1088#1077#1076#1087#1086#1083#1072#1075#1072#1077#1084#1099#1081' '#1088#1072#1079#1084#1077#1088
         Width = 152
       end>
+  end
+  object Button3: TButton
+    Left = 8
+    Top = 367
+    Width = 89
+    Height = 26
+    Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
+    TabOrder = 4
+    OnClick = Button3Click
+  end
+  object Button4: TButton
+    Left = 112
+    Top = 367
+    Width = 89
+    Height = 25
+    Caption = #1059#1076#1072#1083#1080#1090#1100' '#1041#1044
+    TabOrder = 5
+    OnClick = Button4Click
   end
 end

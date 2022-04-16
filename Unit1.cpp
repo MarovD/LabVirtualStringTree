@@ -33,24 +33,23 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		 sqlite3 *db;
 		 sqlite3_stmt *pStmt;
 		 int rc,coln,i,j;
-		 UnicodeString Zapros;
 
 		 if ( sqlite3_open(db_name,&db))
 			{
 		ShowMessage("Can't open database: ");
-        ShowMessage(sqlite3_errmsg(db));
-        sqlite3_close(db);
+		ShowMessage(sqlite3_errmsg(db));
+		sqlite3_close(db);
 			}
 
 
 		// шаг 1 подготовка SQL инструкции к выполнению
         //(компил¤ци¤ ее в байт-код)
 		if (sqlite3_prepare(db, str.c_str(), -1, &pStmt, NULL))
-        {
-            sqlite3_finalize(pStmt);
+		{
+			sqlite3_finalize(pStmt);
             sqlite3_close(db);
 		}
-        // шаг 2 выполнение SQL инструкций
+		// шаг 2 выполнение SQL инструкций
 
 		while((rc = sqlite3_step(pStmt)) == SQLITE_ROW)
 		{
@@ -61,33 +60,30 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			{
 			AnsiString otwet;
 			otwet.printf("%s",sqlite3_column_text(pStmt, j));
-			Zapros = otwet;
-
-
 				  switch (j) {
 					case 0:
 					  {
-						  nodeData->id =Zapros.ToInt();;
+						  nodeData->id =otwet.ToInt();;
 						  break;
 					  }
 					case 1:
 					  {
-						  nodeData->origin = UnicodeString(Zapros);
+						  nodeData->origin = UnicodeString(otwet);
 						  break;
 					  }
 					case 2:
 					  {
-						  nodeData->name=  UnicodeString(Zapros);
+						  nodeData->name=  UnicodeString(otwet);
 						  break;
 					  }
 					case 3:
 					  {
-						  nodeData->description= UnicodeString(Zapros);
+						  nodeData->description= UnicodeString(otwet);
 						  break;
 					  }
 					case 4:
 					  {
-						  nodeData->estimated_size=Zapros.ToInt();
+						  nodeData->estimated_size=otwet.ToInt();
 						  break;
 					  }
 
@@ -96,12 +92,12 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			}
 
 		}
-        // получение сообщени¤ при ошибке
-        // шаг 4 завершение выполнени¤ запроса
-        sqlite3_finalize(pStmt);
+		// получение сообщени¤ при ошибке
+		// шаг 4 завершение выполнени¤ запроса
+		sqlite3_finalize(pStmt);
 
 
-    // закрытие Ѕƒ
+	// закрытие Ѕƒ
 	sqlite3_close(db);
 
 		 VirtualStringTree1->EndUpdate();
@@ -111,7 +107,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
 		VirtualStringTree1->Clear();
-        VirtualStringTree2->Clear();
+		VirtualStringTree2->Clear();
 }
 //---------------------------------------------------------------------------
 
@@ -186,6 +182,74 @@ void __fastcall TForm1::VirtualStringTree2GetText(TBaseVirtualTree *Sender, PVir
 		  break;
 		}
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+		 char *db_name="Databases.db";
+		 PVirtualNode numstr =  VirtualStringTree1->GetFirstSelected();
+		 if(numstr==NULL)
+		 {
+		  return;
+		 }
+		 TreeNodeStruct *nodeData = (TreeNodeStruct*) VirtualStringTree1->GetNodeData(numstr);
+
+		 AnsiString str="DELETE from databases where id = "+(AnsiString)nodeData->id +" ;";
+		 sqlite3 *db;
+		 sqlite3_stmt *pStmt;
+		 int rc,coln,j;
+		 UnicodeString Zapros;
+
+		 if ( sqlite3_open(db_name,&db))
+			{
+		ShowMessage("Can't open database: ");
+		ShowMessage(sqlite3_errmsg(db));
+		sqlite3_close(db);
+			}
+
+			if (sqlite3_exec(db, str.c_str(), NULL, 0,NULL))
+			{
+				Label1->Caption=str;
+				sqlite3_finalize(pStmt);
+				sqlite3_close(db);
+			}
+
+
+		sqlite3_finalize(pStmt);
+		sqlite3_close(db);
+
+         Button1Click(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+		char *db_name="Databases.db";
+		 PVirtualNode numstr =  VirtualStringTree1->GetFirstSelected();
+		 TreeNodeStruct *nodeData = (TreeNodeStruct*) VirtualStringTree1->GetNodeData(numstr);
+
+		 AnsiString str="DELETE from databases;";
+		 sqlite3 *db;
+
+		 UnicodeString Zapros;
+
+		 if ( sqlite3_open(db_name,&db))
+			{
+		ShowMessage("Can't open database: ");
+		ShowMessage(sqlite3_errmsg(db));
+		sqlite3_close(db);
+			}
+
+		// шаг 2 выполнение SQL инструкций
+		if (sqlite3_exec(db, str.c_str(), NULL, 0,NULL))
+		{
+            Label1->Caption="Error";
+			sqlite3_close(db);
+		}
+
+		sqlite3_close(db);
+		Button2Click(Sender);
 }
 //---------------------------------------------------------------------------
 
