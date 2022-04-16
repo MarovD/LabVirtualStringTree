@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 694
   Top = 312
   Caption = 'Form1'
-  ClientHeight = 444
-  ClientWidth = 621
+  ClientHeight = 451
+  ClientWidth = 622
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,6 @@ object Form1: TForm1
   Font.Style = []
   Position = poDesigned
   TextHeight = 15
-  object Label1: TLabel
-    Left = 8
-    Top = 408
-    Width = 193
-    Height = 28
-    Caption = 'Label1'
-  end
   object VirtualStringTree1: TVirtualStringTree
     Left = 8
     Top = 8
@@ -48,16 +41,16 @@ object Form1: TForm1
     Left = 8
     Top = 332
     Width = 89
-    Height = 29
+    Height = 48
     Caption = #1047#1072#1087#1086#1083#1085#1080#1090#1100
     TabOrder = 1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 112
+    Left = 111
     Top = 332
     Width = 89
-    Height = 29
+    Height = 48
     Caption = #1054#1095#1080#1089#1090#1082#1072
     TabOrder = 2
     OnClick = Button2Click
@@ -66,7 +59,7 @@ object Form1: TForm1
     Left = 224
     Top = 332
     Width = 389
-    Height = 109
+    Height = 104
     Align = alCustom
     Header.AutoSizeIndex = 0
     Header.Options = [hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
@@ -93,18 +86,18 @@ object Form1: TForm1
   end
   object Button3: TButton
     Left = 8
-    Top = 367
+    Top = 386
     Width = 89
-    Height = 26
+    Height = 50
     Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
     TabOrder = 4
     OnClick = Button3Click
   end
   object Button4: TButton
-    Left = 112
-    Top = 367
+    Left = 111
+    Top = 386
     Width = 89
-    Height = 25
+    Height = 50
     Caption = #1059#1076#1072#1083#1080#1090#1100' '#1041#1044
     TabOrder = 5
     OnClick = Button4Click

@@ -21,7 +21,6 @@ __published:	// IDE-managed Components
 	TVirtualStringTree *VirtualStringTree2;
 	TButton *Button3;
 	TButton *Button4;
-	TLabel *Label1;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall VirtualStringTree1GetText(TBaseVirtualTree *Sender, PVirtualNode Node,

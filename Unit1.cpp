@@ -26,7 +26,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		 VirtualStringTree1->Clear();
 		 VirtualStringTree1->BeginUpdate();
 
-		 char *db_name="Databases.db";
+		 char* db_name = "Databases.db";
 
 		 AnsiString str="Select * from databases ;";
 
@@ -36,9 +36,9 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 		 if ( sqlite3_open(db_name,&db))
 			{
-		ShowMessage("Can't open database: ");
-		ShowMessage(sqlite3_errmsg(db));
+		ShowMessage("Can't open database: " + (String)sqlite3_errmsg(db));
 		sqlite3_close(db);
+        return;
 			}
 
 
@@ -187,7 +187,7 @@ void __fastcall TForm1::VirtualStringTree2GetText(TBaseVirtualTree *Sender, PVir
 
 void __fastcall TForm1::Button3Click(TObject *Sender)
 {
-		 char *db_name="Databases.db";
+		 char* db_name = "Databases.db";
 		 PVirtualNode numstr =  VirtualStringTree1->GetFirstSelected();
 		 if(numstr==NULL)
 		 {
@@ -210,7 +210,6 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 			if (sqlite3_exec(db, str.c_str(), NULL, 0,NULL))
 			{
-				Label1->Caption=str;
 				sqlite3_finalize(pStmt);
 				sqlite3_close(db);
 			}
@@ -225,7 +224,7 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 void __fastcall TForm1::Button4Click(TObject *Sender)
 {
-		char *db_name="Databases.db";
+		char* db_name = "Databases.db";
 		 PVirtualNode numstr =  VirtualStringTree1->GetFirstSelected();
 		 TreeNodeStruct *nodeData = (TreeNodeStruct*) VirtualStringTree1->GetNodeData(numstr);
 
@@ -244,7 +243,6 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 		// шаг 2 выполнение SQL инструкций
 		if (sqlite3_exec(db, str.c_str(), NULL, 0,NULL))
 		{
-            Label1->Caption="Error";
 			sqlite3_close(db);
 		}
 
@@ -252,4 +250,5 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 		Button2Click(Sender);
 }
 //---------------------------------------------------------------------------
+
 
