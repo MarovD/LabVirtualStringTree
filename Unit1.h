@@ -8,6 +8,9 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include "VirtualTrees.hpp"
+#include <Data.DB.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <Data.Win.ADODB.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -15,12 +18,16 @@ __published:	// IDE-managed Components
 	TVirtualStringTree *VirtualStringTree1;
 	TButton *Button1;
 	TButton *Button2;
-	TLabel *Label1;
+	TVirtualStringTree *VirtualStringTree2;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall VirtualStringTree1GetText(TBaseVirtualTree *Sender, PVirtualNode Node,
           TColumnIndex Column, TVSTTextType TextType, UnicodeString &CellText);
 	void __fastcall VirtualStringTree1AddToSelection(TBaseVirtualTree *Sender, PVirtualNode Node);
+	void __fastcall VirtualStringTree2GetText(TBaseVirtualTree *Sender, PVirtualNode Node,
+          TColumnIndex Column, TVSTTextType TextType, UnicodeString &CellText);
+
+
 
 
 private:	// User declarations
@@ -33,7 +40,11 @@ extern PACKAGE TForm1 *Form1;
 typedef struct{
 
 	int id;
-	UnicodeString   FileName;
+	UnicodeString   origin;
+	UnicodeString   name;
+	UnicodeString   description;
+    int estimated_size;
+
 
 } TreeNodeStruct;
 //---------------------------------------------------------------------------
